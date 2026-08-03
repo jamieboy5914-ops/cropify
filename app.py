@@ -1,15 +1,3 @@
-"""
-Cotton leaf pest and disease detection - web application.
-
-Run locally in VS Code:
-    1. pip install -r requirements.txt
-    2. python app.py
-    3. open http://127.0.0.1:5000 in a browser
-
-The /prediction route loads the trained model once at start-up and returns
-a real prediction. The original repo returned a fixed placeholder string
-and never loaded a model.
-"""
 import json
 import os
 import time
@@ -116,8 +104,7 @@ def prediction():
 
 
 # The ESP32 writes its readings to this path every 15 seconds.
-FIREBASE_URL = ("https://cropify-9980a-default-rtdb.asia-southeast1"
-                ".firebasedatabase.app/sensors.json")
+FIREBASE_URL = "https://cropify-ab09f-default-rtdb.europe-west1.firebasedatabase.app/sensors.json"
 
 # Used to spot a node that has stopped uploading. The board reports its own
 # uptime, so if that figure stops advancing between polls the board is silent.
@@ -126,14 +113,7 @@ _last_uptime = {"value": None, "seen_at": 0.0}
 
 @app.route("/data")
 def data():
-    """
-    Live sensor readings, fetched from Firebase.
-
-    Firebase holds only the most recent reading, because the board sends a PUT
-    rather than an append. If the board goes offline that last value stays in
-    the database indefinitely, which would show as live data on the dashboard.
-    The stale_for figure below guards against that.
-    """
+    
     try:
         response = requests.get(FIREBASE_URL, timeout=5)
         response.raise_for_status()
