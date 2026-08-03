@@ -1,0 +1,17 @@
+# Web application
+flask==3.0.3
+flask-cors==4.0.1
+requests==2.32.3
+
+# Model inference and training
+tensorflow==2.16.1        # use tensorflow-cpu if you have no GPU
+numpy==1.26.4
+pillow==10.3.0
+
+# Metrics and figures
+scikit-learn==1.4.2
+matplotlib==3.8.4
+seaborn==0.13.2
+
+# Dataset download
+kaggle==1.6.14

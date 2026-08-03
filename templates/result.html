@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Result - Cropify</title>
+  <link rel="icon" type="image/x-icon" href="/static/assets/aboutfav.png">
+  <link rel="stylesheet" href="/static/css/theme.css">
+  <style>
+    .wrap{min-height:calc(100vh - 60px);display:flex;align-items:center;justify-content:center;
+      padding:40px 16px;background:linear-gradient(rgba(9,26,15,.6),rgba(9,26,15,.75)),
+      url('/static/assets/BGIMG2.jpg') center/cover fixed}
+    .card{width:100%;max-width:600px;text-align:center}
+    .card h1{font-size:clamp(24px,5vw,30px);margin-bottom:22px}
+    img.leaf{max-width:100%;max-height:300px;border-radius:14px;margin:0 auto;
+      box-shadow:0 6px 18px rgba(0,0,0,.2)}
+    .verdict{margin:22px 0 4px;color:var(--muted);font-size:15px}
+    .cls{font-size:clamp(24px,5vw,30px);font-weight:700;color:var(--green-dark);margin:2px 0}
+    .fn{font-size:12px;color:#9aa8a0;word-break:break-all;margin-bottom:20px}
+    .cure{background:var(--soft);border-left:5px solid var(--green);border-radius:10px;
+      padding:18px 20px;text-align:left;color:#26402d;font-size:15px;line-height:1.6}
+    .cure b{color:var(--green-dark)}
+    .btn-primary{margin-top:26px}
+  </style>
+</head>
+<body>
+    <nav class="nav">
+    <a class="brand" href="/"><img src="/static/assets/LOGO.png" alt="Cropify"><span>Cropify</span></a>
+    <button class="burger" onclick="document.getElementById('navlinks').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="links" id="navlinks">
+      <a href="/">Home</a>
+      <a href="/prediction">Detect</a>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/aboutapp">About</a>
+    </div>
+  </nav>
+  <div class="wrap">
+    <div class="card">
+      <h1>Prediction Result</h1>
+      <img class="leaf" src="{{ url_for('static', filename='uploads/' + filename) }}" alt="uploaded leaf">
+      <div class="verdict">Predicted class</div>
+      <div class="cls">{{ prediction }}</div>
+      <div class="fn">{{ filename }}</div>
+      <div class="cure"><b>Guidance for {{ prediction }}:</b> {{ Cure }}</div>
+      <a class="btn-primary" href="/prediction">Analyse another leaf</a>
+    </div>
+  </div>
+</body>
+</html>

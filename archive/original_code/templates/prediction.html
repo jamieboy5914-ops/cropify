@@ -1,0 +1,332 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaf Disease Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        #background {
+            background-image: url('static/assets/predict.jpg');
+            background-size: cover;
+            background-position: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            filter: blur(5px);
+            z-index: -1; 
+        }
+        #container {
+            background: rgba(0, 0, 0, 0.5); 
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            text-align: center;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1; 
+        }
+        h1 {
+            margin-bottom: 30px;
+        }
+        h2 {
+            margin-top: 30px;
+        }
+        #imagePreview {
+            margin-top: 40px;
+            width: 300px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            display: none;
+        }
+        #predictionResult {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+        button {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkgreen;
+        }
+    </style>
+</head>
+<body>
+    <div id="background"></div>
+    <div id="container">
+        <h1>Crop Disease Detection</h1>
+        <form action="/predict" method="post" d="uploadForm" enctype="multipart/form-data">
+            <input type="file" id="imageInput" accept="image/*" required>
+            <button type="submit">Predict Crop Disease</button>
+        </form>
+        <div id="originalImageContainer">
+            <h2>Uploaded Image</h2>
+            <img id="imagePreview" src="" alt="Image Preview">
+        </div>
+        <div id="predictionResult"></div>
+    </div>
+
+    <script>
+        document.getElementById('imageInput').addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                document.getElementById('imagePreview').style.display = 'block';
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    document.getElementById('imagePreview').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const model = localStorage.getItem('selectedModel');
+            document.getElementById('model').textContent = `Selected Model: ${model}`;
+            const url=`/prediction/model=${model}`
+        });
+
+    </script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaf Disease Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        #background {
+            background-image: url('static/assets/predict.jpg');
+            background-size: cover;
+            background-position: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            filter: blur(5px);
+            z-index: -1; 
+        }
+        #container {
+            background: rgba(0, 0, 0, 0.5); 
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            text-align: center;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1; 
+        }
+        h1 {
+            margin-bottom: 30px;
+        }
+        h2 {
+            margin-top: 30px;
+        }
+        #imagePreview {
+            margin-top: 40px;
+            width: 300px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            display: none;
+        }
+        #predictionResult {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+        button {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkgreen;
+        }
+    </style>
+</head>
+<body>
+    <div id="background"></div>
+    <div id="container">
+        <h1>Crop Disease Detection</h1>
+        <form id="uploadForm" method="post" enctype="multipart/form-data">
+            <input type="file" id="imageInput" accept="image/*" required>
+            <button type="submit">Predict Crop Disease</button>
+        </form>
+        <div id="originalImageContainer">
+            <h2>Uploaded Image</h2>
+            <img id="imagePreview" src="" alt="Image Preview">
+        </div>
+        <div id="predictionResult"></div>
+    </div>
+
+    <script>
+        document.getElementById('imageInput').addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                document.getElementById('imagePreview').style.display = 'block';
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    document.getElementById('imagePreview').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const model = localStorage.getItem('selectedModel');
+            const form = document.getElementById('uploadForm');
+            form.action = `/predict?model=${model}`;
+        });
+    </script>
+</body>
+</html> -->
+
+
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Disease Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        #background {
+            background-image: url('static/assets/predict.jpg');
+            background-size: cover;
+            background-position: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            filter: blur(5px);
+            z-index: -1; 
+        }
+        #container {
+            background: rgba(0, 0, 0, 0.5); 
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            text-align: center;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1; 
+        }
+        h1 {
+            margin-bottom: 30px;
+        }
+        h2 {
+            margin-top: 30px;
+        }
+        #imagePreview {
+            margin-top: 40px;
+            width: 300px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            display: none;
+        }
+        #predictionResult {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+        button {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkgreen;
+        }
+    </style>
+</head>
+<body>
+    <div id="background"></div>
+    <div id="container">
+        <h1>Crop Disease Detection</h1>
+        <form id="uploadForm" method="post" enctype="multipart/form-data">
+            <input type="file" id="imageInput" name="file" accept="image/*" required>
+            <button type="submit">Predict Crop Disease</button>
+        </form>
+        <div id="originalImageContainer">
+            <h2>Uploaded Image</h2>
+            <img id="imagePreview" src="" alt="Image Preview">
+        </div>
+        <div id="predictionResult"></div>
+    </div>
+
+    <script>
+        document.getElementById('imageInput').addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                document.getElementById('imagePreview').style.display = 'block';
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    document.getElementById('imagePreview').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const model = localStorage.getItem('selectedModel');
+            const form = document.getElementById('uploadForm');
+            form.action = `/prediction?model=${model}`;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About - Cropify</title>
+  <link rel="icon" type="image/x-icon" href="/static/assets/aboutfav.png">
+  <link rel="stylesheet" href="/static/css/theme.css">
+  <style>
+    .wrap{max-width:820px;margin:0 auto;padding:48px 22px}
+    .wrap h1{color:#fff;font-size:clamp(26px,5vw,36px);margin-bottom:18px}
+    .panel{background:#fff;border-radius:16px;padding:30px;margin-bottom:22px;
+      box-shadow:0 12px 30px rgba(0,0,0,.18)}
+    .panel h2{color:var(--green-dark);margin-bottom:12px;font-size:21px}
+    .panel p,.panel li{color:var(--ink);font-size:15px}
+    .panel ul{padding-left:20px}
+    .panel li{margin-bottom:6px}
+  </style>
+</head>
+<body>
+    <nav class="nav">
+    <a class="brand" href="/"><img src="/static/assets/LOGO.png" alt="Cropify"><span>Cropify</span></a>
+    <button class="burger" onclick="document.getElementById('navlinks').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="links" id="navlinks">
+      <a href="/">Home</a>
+      <a href="/prediction">Detect</a>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/aboutapp">About</a>
+    </div>
+  </nav>
+  <div class="wrap">
+    <h1>About Cropify</h1>
+    <div class="panel">
+      <p>Cropify helps identify cotton leaf diseases and pests early, so growers can act in time to protect the crop and the yield.</p>
+    </div>
+    <div class="panel">
+      <h2>Features</h2>
+      <ul>
+        <li>Upload a cotton leaf image for analysis</li>
+        <li>Classify the leaf into one of seven conditions</li>
+        <li>Receive guidance for managing each condition</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h2>How it works</h2>
+      <p>A convolutional neural network based on MobileNetV2 was trained on the SAR-CLD-2024 cotton leaf dataset. When you upload an image, the model analyses its visual features and returns the most likely class with treatment guidance.</p>
+    </div>
+  </div>
+  <footer class="footer">Cropify &middot; Cotton leaf pest and disease detection</footer>
+  <script src="/static/script.js"></script>
+</body>
+</html>

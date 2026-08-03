@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container-fluid {
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+body {
+    margin: 0; 
+    overflow: hidden;
+    font-family: "Century Gothic", 'Lato', sans-serif;
+    background: linear-gradient(90deg, hsl(0, 0%, 100%), hsl(0, 3%, 56%));
+    background-image: url('/static/assets/loginImg.jpg'); /* Change the background image for the login page */
+    background-size: cover;
+
+}
+
+/* Additional CSS for sign-up page */
+body.signup {
+    background-image: url('/static/assets/img.jpg'); /* Specify a different background image for the sign-up page */
+}
+
+form {
+    border-radius: 20px;
+    margin-top: 50px;
+    width: 30%; /* Adjusted width for better readability */
+    background-color: rgba(64, 147, 56, 0.9); /* Increased opacity for better contrast */
+    padding: 40px;
+    align-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50 px;
+    /* margin-bottom: auto; */
+   
+   
+}
+body.signup form {
+    background-color: rgba(60, 134, 86, 0.9); /* Change the background color for the sign-up form */
+}
+
+.btn-primary {
+    width: 100%;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(90deg, #000000, #000000); /* Changed gradient colors */
+    color: white;
+    font-weight: bold;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Added transition for smoother hover effect */
+}
+
+
+.btn-primary:hover {
+    color: white;
+    background: rgba(87, 89, 92, 0.8);
+}
+
+.form-control {
+    color: #333; /* Changed font color to a darker shade */
+    background-color: rgba(255, 255, 255, 0.9); /* Lightened background for better readability */
+    border: none;
+    border-radius: 25px; /* Changed border radius to round */
+    padding: 10px;
+    margin-bottom: 20px;
+    transition: box-shadow 0.3s ease; /* Added transition for smoother hover effect */
+}
+
+.form-control:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Added focus effect */
+}
+
+h4 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 20px; /* Added spacing below heading */
+}
+
+.form-label {
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px; /* Added spacing below labels */
+}
+
+
+@media only screen and (max-width: 600px) {
+    form {
+        width: 90%; /* Adjusted width for smaller screens */
+    }
+}
+h5{
+    border: 1px solid rgb(78, 77, 77); 
+    border-radius: 10px;
+    background-color:rgb(78, 77, 77); 
+    color: white;
+    padding: 10px 15px;
+}
+#signup button:hover{
+    background-color: black;
+}
+#signup button{
+    border-radius: 10px solid;
+    padding: 10px 15px;
+    margin-top: 5px;
+}

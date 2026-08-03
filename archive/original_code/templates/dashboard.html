@@ -1,0 +1,357 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DASHBOARD</title>
+    <link href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABI//8ASP//AEj//wBI//8ASP//AEj//wBI//8ASP//AEj//wBI//8ASP//wAAAAAAAAAAAAAAAAAAAAAASP//AEj//wBI//8ASP//AEj//wBI//8ASP//AEj//wBI//8ASP//AEj//wBI//8AAAAAAAAAAAAAAAAAEj//wBI//+Pj4+Qj4+PkI+Pj5CPj4+Qj4+PkI+Pj5CPj4+Qj4+PkI+Pj5CPj4+QAEj//wBI//8AAAAAAAAAAABI//8ASP//j4+PkP///////////////////////////////////////////////wBI//8ASP//AAAAAAAAAAAASP//AEj//4+Pj5D/////Mo8A//////8AgP///////+OrKf//////AAD///////8ASP//AEj//wAAAAAAAAAAAEj//wBI//+Pj4+Q/////zKPAP//////AID////////jqyn//////wAA////////AEj//wBI//8AAAAAAAAAAABI//8ASP//j4+PkP////8yjwD//////wCA////////46sp//////8AAP///////wBI//8ASP//AAAAAAAAAAAASP//AEj//4+Pj5D/////Mo8A//////8AgP//////////////////AAD///////8ASP//AEj//wAAAAAAAAAAAEj//wBI//+Pj4+Q////////////////AID//////////////////wAA////////AEj//wBI//8AAAAAAAAAAABI//8ASP//j4+PkP///////////////wCA//////////////////8AAP///////wBI//8ASP//AAAAAAAAAAAASP//AEj//4+Pj5D/////////////////////////////////////AAD///////8ASP//AEj//wAAAAAAAAAAAEj//wBI//+Pj4+Q////////////////////////////////////////////////AEj//wBI//8AAAAAAAAAAAAAAAAASP//AEj//wBI//8ASP//AEj//wBI//8ASP//AEj//wBI//8ASP//AEj//wBI//8ASP//AEj//wAAAAAAAAAAAAAAAAAAAAAASP//AEj//wBI//8ASP//AEj//wBI//8ASP//AEj//wBI//8ASP//AEj//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAIAHAACAAwAAgAEAAIABAACAAQAAgAEAAIABAACAAQAAgAEAAIABAACAAQAAgAEAAIABAACAAQAAgAEAAMABAADgAQAA//8AAA==" rel="icon" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        label {
+            font-size: 18px;
+        }
+
+        button {
+            background-color: #39a13d;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            margin: 0 10px;
+        }
+
+        button:hover {
+            background-color: darkgreen;
+        }
+
+        .upper {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .sensor-reading {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            width: 80%;
+            margin: 0 auto 10px;
+            background-color: #eee;
+            border-radius: 5px;
+            height: 20px;
+            overflow: hidden;
+        }
+
+        .progress {
+            width: 50%;
+            background-color: #4CAF50;
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+
+        .heading {
+            background-color: #120f0fde;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .prediction-section {
+            margin-top: 70px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="heading">
+        <h1>DASHBOARD</h1>
+    </div>
+    <div class="container">
+        <div class="upper">
+            <h2>Sensor Readings</h2>
+            <div class="sensor-reading" id="temperature">Temperature: 25°C</div>
+            <div class="progress-bar">
+                <div class="progress" id="temperature-progress" style="width: 20%;"></div>
+            </div>
+            <div class="sensor-reading" id="humidity">Humidity: 60%</div>
+            <div class="progress-bar">
+                <div class="progress" id="humidity-progress" style="width: 60%;"></div>
+            </div>
+            <div class="sensor-reading" id="Soil">Soil Moisture: 600</div>
+            <div class="progress-bar">
+                <div class="progress" id="Soil-progress" style="width: 40%;"></div>
+            </div>
+        </div>
+        <div class="prediction-section">
+            <h2>PREDICTION</h2>
+            <button onclick="selectModel('cotton')">Predict Cotton</button>
+            <button onclick="selectModel('maize')">Predict Maize</button>
+        
+        </div>
+    </div> 
+
+     <script>
+        // function setPredictionType(value) {
+        //     document.getElementById('prediction_type').value = value;
+        // }
+
+        function selectModel(model) {
+            localStorage.setItem('selectedModel', model);
+            const url='prediction';
+            window.location.href = url;
+            console.log(model)
+        }
+
+        // function fetchDataAndRefresh() {
+        //     fetch('http://127.0.0.1:5000/data')
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             const temperature = data.temperature;
+        //             const humidity = data.humidity;
+        //             document.getElementById('temperature').textContent = `Temperature: ${temperature}°C`;
+        //             document.getElementById('temperature-progress').style.width = `${temperature}%`;
+        //             document.getElementById('humidity').textContent = `Humidity: ${humidity}%`;
+        //             document.getElementById('humidity-progress').style.width = `${humidity}%`;
+        //         })
+        //         .catch(error => {
+        //             console.error('Error fetching data:', error);
+        //             document.getElementById('data').innerHTML = '<p>Error fetching data</p>';
+        //         });
+
+        //     setTimeout(fetchDataAndRefresh, 1000);
+        // }
+
+
+        function fetchDataAndRefresh() {
+    fetch('/data')
+        .then(response => response.json())
+        .then(data => {
+            const temperature = data.temperature;
+            const humidity = data.humidity;
+            const soilMoisture = data.soil_moisture; // Assuming your API response includes soil moisture data
+
+            // Update temperature display
+            document.getElementById('temperature').textContent = `Temperature: ${temperature}°C`;
+            document.getElementById('temperature-progress').style.width = `${temperature}%`;
+
+            // Update humidity display
+            document.getElementById('humidity').textContent = `Humidity: ${humidity}%`;
+            document.getElementById('humidity-progress').style.width = `${humidity}%`;
+
+            // Update soil moisture display
+            document.getElementById('soil-moisture').textContent = `Soil Moisture: ${soilMoisture}%`;
+            document.getElementById('soil-moisture-progress').style.width = `${soilMoisture}%`;
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            document.getElementById('data').innerHTML = '<p>Error fetching data</p>';
+        });
+
+    setTimeout(fetchDataAndRefresh, 1000); // Refresh every 1 second
+}
+
+        fetchDataAndRefresh();
+    </script>
+</body>
+
+</html> -->
+
+
+<!-- 2nd_____________ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DASHBOARD</title>
+    <link href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABI//8ASP//AEj//wBI//8ASP//AEj//wBI//8ASP//AEj//wBI//8ASP//wAAAAAAAAAAAAAAAAAAAAAASP//AEj//wBI//8ASP//AEj//wBI//8ASP//AEj//wBI//8ASP//AEj//wBI//8ASP//AEj//wAAAAAAAAAAAAAAAAAEj//wBI//+Pj4+Qj4+PkI+Pj5CPj4+Qj4+PkI+Pj5CPj4+Qj4+PkI+Pj5CPj4+QAEj//wBI//8AAAAAAAAAAABI//8ASP//j4+PkP///////////////////////////////////////////////wBI//8ASP//AAAAAAAAAAAASP//AEj//4+Pj5D/////Mo8A//////8AgP///////+OrKf//////AAD///////8ASP//AEj//wAAAAAAAAAAAEj//wBI//+Pj4+Q/////zKPAP//////AID////////jqyn//////wAA////////AEj//wBI//8AAAAAAAAAAABI//8ASP//j4+PkP////8yjwD//////wCA////////46sp//////8AAP///////wBI//8ASP//AAAAAAAAAAAASP//AEj//4+Pj5D/////Mo8A//////8AgP//////////////////AAD///////8ASP//AEj//wAAAAAAAAAAAEj//wBI//+Pj4+Q////////////////AID//////////////////wAA////////AEj//wBI//8AAAAAAAAAAABI//8ASP//j4+PkP///////////////wCA//////////////////8AAP///////wBI//8ASP//AAAAAAAAAAAASP//AEj//4+Pj5D/////////////////////////////////////AAD///////8ASP//AEj//wAAAAAAAAAAAEj//wBI//+Pj4+Q////////////////////////////////////////////////AEj//wBI//8AAAAAAAAAAAAAAAAASP//AEj//wBI//8ASP//AEj//wBI//8ASP//AEj//wBI//8ASP//AEj//wBI//8ASP//AEj//wAAAAAAAAAAAAAAAAAAAAAASP//AEj//wBI//8ASP//AEj//wBI//8ASP//AEj//wBI//8ASP//AEj//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAIAHAACAAwAAgAEAAIABAACAAQAAgAEAAIABAACAAQAAgAEAAIABAACAAQAAgAEAAIABAACAAQAAgAEAAMABAADgAQAA//8AAA==" rel="icon" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            width: 50%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        label {
+            font-size: 18px;
+        }
+
+        button {
+            background-color: #39a13d;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            margin: 0 10px;
+        }
+
+        button:hover {
+            background-color: darkgreen;
+        }
+
+        .upper {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .sensor-reading {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            width: 80%;
+            margin: 0 auto 10px;
+            background-color: #eee;
+            border-radius: 5px;
+            height: 20px;
+            overflow: hidden;
+        }
+
+        .progress {
+            width: 50%;
+            background-color: #4CAF50;
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+
+        .heading {
+            background-color: #120f0fde;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .prediction-section {
+            margin-top: 70px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="heading">
+        <h1>DASHBOARD</h1>
+    </div>
+    <div class="container">
+        <div class="upper">
+            <h2>Sensor Readings</h2>
+            <div class="sensor-reading" id="temperature">Temperature: 25°C</div>
+            <div class="progress-bar">
+                <div class="progress" id="temperature-progress" style="width: 20%;"></div>
+            </div>
+            <div class="sensor-reading" id="humidity">Humidity: 60%</div>
+            <div class="progress-bar">
+                <div class="progress" id="humidity-progress" style="width: 60%;"></div>
+            </div>
+            <div class="sensor-reading" id="soil-moisture">Soil Moisture: 40%</div>
+            <div class="progress-bar">
+                <div class="progress" id="soil-moisture-progress" style="width: 40%;"></div>
+            </div>
+        </div>
+        <div class="prediction-section">
+            <h2>PREDICTION</h2>
+            <button onclick="selectModel('cotton')">Predict Cotton</button>
+        </div>
+    </div> 
+
+    <script>
+        function selectModel(model) {
+            localStorage.setItem('selectedModel', model);
+            const url = 'prediction';
+            window.location.href = url;
+        }
+
+        function fetchDataAndRefresh() {
+            fetch('/data')
+                .then(response => response.json())
+                .then(data => {
+                    const temperature = data.temperature;
+                    const humidity = data.humidity;
+                    const soilMoisture = data.soil_moisture; // Assuming your API response includes soil moisture data
+
+                    // Update temperature display
+                    document.getElementById('temperature').textContent = `Temperature: ${temperature}°C`;
+                    document.getElementById('temperature-progress').style.width = `${temperature}%`;
+
+                    // Update humidity display
+                    document.getElementById('humidity').textContent = `Humidity: ${humidity}%`;
+                    document.getElementById('humidity-progress').style.width = `${humidity}%`;
+
+                    // Update soil moisture display
+                    document.getElementById('soil-moisture').textContent = `Soil Moisture: ${soilMoisture}%`;
+                    document.getElementById('soil-moisture-progress').style.width = `${soilMoisture}%`;
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    document.getElementById('temperature').textContent = 'Temperature: N/A';
+                    document.getElementById('temperature-progress').style.width = '0%';
+                    document.getElementById('humidity').textContent = 'Humidity: N/A';
+                    document.getElementById('humidity-progress').style.width = '0%';
+                    document.getElementById('soil-moisture').textContent = 'Soil Moisture: N/A';
+                    document.getElementById('soil-moisture-progress').style.width = '0%';
+                });
+
+            setTimeout(fetchDataAndRefresh, 500);
+        }
+
+        fetchDataAndRefresh(); 
+    </script>
+</body>
+</html>

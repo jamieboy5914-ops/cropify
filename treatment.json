@@ -1,0 +1,9 @@
+{
+  "Bacterial Blight": "Xanthomonas citri pv. malvacearum. Remove and destroy infected debris, use certified acid-delinted seed, and avoid overhead irrigation because splashing spreads the bacteria.",
+  "Curl Virus": "Cotton leaf curl virus, carried by whitefly. Control the whitefly rather than the virus, remove infected plants early, and prefer tolerant varieties.",
+  "Healthy Leaf": "No disease or pest damage detected. Continue routine scouting and keep irrigation and nutrition steady.",
+  "Herbicide Growth Damage": "Herbicide injury and not a pathogen. Review application rate, timing and sprayer calibration, then check for drift from neighbouring fields.",
+  "Leaf Hopper Jassids": "Amrasca biguttula feeding damage. Inspect leaf undersides where nymphs sit. Treat at the local economic threshold and not on a fixed calendar.",
+  "Leaf Redding": "A physiological response and not an infection. Common causes are nitrogen or magnesium shortage, water stress and cold nights. Take a soil test first.",
+  "Leaf Variegation": "Patchy colouring, often a micronutrient shortage or a genetic trait. Check zinc, iron and magnesium, then watch whether the pattern spreads."
+}

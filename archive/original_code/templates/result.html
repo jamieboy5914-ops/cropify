@@ -1,0 +1,285 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .prediction-info {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        img {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Prediction Result</h1>
+        <div class="prediction-info">
+            <p>The predicted class for image <strong>{{ filename }}</strong> is: <strong>{{ prediction }}</strong></p>
+        </div>
+        <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Uploaded Image">
+        <p>The Cure for the {{prediction}} is : <strong> {{Cure}}</strong></p>
+    </div>
+</body>
+
+
+
+2nd best
+</html> -->
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <style>
+       #background {
+            background-image: url('static/assets/predict.jpg');
+            background-size: cover;
+            background-position: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            filter: blur(5px);
+            z-index: -1; 
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e9ecef;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333333;
+        }
+
+        .prediction-info {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .prediction-info p {
+            font-size: 18px;
+            color: #555555;
+        }
+
+        .prediction-info strong {
+            color: #ff0000;
+        }
+
+        img {
+            display: block;
+            margin: 20px auto;
+            max-width: 90%;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .cure-info {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #ccdaad;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .cure-info p {
+            font-size: 18px;
+            color: #333333;
+        }
+
+        .red-text {
+            color: #ff0000;
+        }
+
+        .green-text {
+            color: #28a745;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="background"></div>
+    <div class="container">
+        <h1>Prediction Result</h1>
+        <div class="prediction-info">
+            <p>The predicted class for image <strong>{{ filename }}</strong> is: <strong>{{ prediction }}</strong></p>
+        </div>
+        <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Uploaded Image">
+        <div class="cure-info">
+            <p>The Cure for the <strong class="red-text">{{ prediction }}</strong> is: <strong class="green-text">{{ Cure }}</strong></p>
+        </div>
+    </div>
+</body>
+
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <style>
+        #background {
+            background-image: url('static/assets/predict.jpg');
+            background-size: cover;
+            background-position: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            filter: blur(5px);
+            z-index: -1; 
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e9ecef;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            min-height: 100vh;
+            overflow: hidden; /* Remove scrollbar */
+        }
+
+        .container {
+            max-width: 800px;
+            /* margin: 30px auto; */
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            top: 40px; 
+            left: 215px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333333;
+        }
+
+        .prediction-info {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .prediction-info p {
+            font-size: 18px;
+            color: #555555;
+        }
+
+        .prediction-info strong {
+            color: #ff0000;
+        }
+
+        img {
+            display: block;
+            margin: 20px auto;
+            max-width: 30%;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .cure-info {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #ccdaad;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .cure-info p {
+            font-size: 18px;
+            color: #333333;
+        }
+
+        .red-text {
+            color: #ff0000;
+        }
+
+        .green-text {
+            color: #28a745;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="background"></div>
+    <div class="container">
+        <h1>Prediction Result</h1>
+        <div class="prediction-info">
+            <p>The predicted class for image <strong>{{ filename }}</strong> is: <strong>{{ prediction }}</strong></p>
+        </div>
+        <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Uploaded Image">
+        <div class="cure-info">
+            <p>The Cure for the <strong class="red-text">{{ prediction }}</strong> : <strong class="green-text">{{ Cure }}</strong></p>
+        </div>
+    </div>
+</body>
+
+</html>

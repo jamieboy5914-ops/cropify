@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Cropify</title>
+  <link rel="icon" type="image/x-icon" href="/static/assets/aboutfav.png">
+  <link rel="stylesheet" href="/static/css/theme.css">
+  <style>
+    .wrap{min-height:calc(100vh - 60px);padding:40px 16px;
+      background:linear-gradient(rgba(9,26,15,.6),rgba(9,26,15,.75)),
+      url('/static/assets/BGIMG2.jpg') center/cover fixed;
+      display:flex;align-items:flex-start;justify-content:center}
+    .panel{width:100%;max-width:560px}
+    .card{margin-bottom:22px}
+    .card h2{color:var(--green-dark);font-size:20px;margin-bottom:18px;text-align:center}
+    .reading{font-size:17px;color:var(--ink);margin-bottom:8px;font-weight:600}
+    .track{height:12px;background:var(--soft);border-radius:8px;overflow:hidden;margin-bottom:20px}
+    .track .fill{height:100%;background:var(--green);border-radius:8px;transition:width .4s ease}
+    .predict{text-align:center}
+    .predict .btn-primary{margin-top:6px}
+    h1.title{color:#fff;text-align:center;font-size:clamp(26px,5vw,34px);margin-bottom:24px}
+    .note{margin-top:6px;font-size:13px;text-align:center;padding:8px 10px;border-radius:8px}
+    .note.good{background:var(--soft);color:var(--green-dark)}
+    .note.bad{background:#fdecea;color:#a6342a}
+  </style>
+</head>
+<body>
+    <nav class="nav">
+    <a class="brand" href="/"><img src="/static/assets/LOGO.png" alt="Cropify"><span>Cropify</span></a>
+    <button class="burger" onclick="document.getElementById('navlinks').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="links" id="navlinks">
+      <a href="/">Home</a>
+      <a href="/prediction">Detect</a>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/aboutapp">About</a>
+    </div>
+  </nav>
+  <div class="wrap">
+    <div class="panel">
+      <h1 class="title">Live Field Dashboard</h1>
+
+      <div class="card">
+        <h2>Sensor Readings</h2>
+
+        <div class="reading" id="temperature">Temperature: -- &deg;C</div>
+        <div class="track"><div class="fill" id="temperature-progress" style="width:0%"></div></div>
+
+        <div class="reading" id="humidity">Humidity: -- %</div>
+        <div class="track"><div class="fill" id="humidity-progress" style="width:0%"></div></div>
+
+        <div class="reading" id="soil-moisture">Soil Moisture: -- %</div>
+        <div class="track"><div class="fill" id="soil-moisture-progress" style="width:0%"></div></div>
+
+        <div class="note" id="status-note">Connecting to the node...</div>
+      </div>
+
+      <div class="card predict">
+        <h2>Leaf Prediction</h2>
+        <button class="btn-primary" onclick="selectModel('cotton')">Detect Cotton Disease</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function selectModel(model){
+      try{ localStorage.setItem('selectedModel', model); }catch(e){}
+      window.location.href = '/prediction';
+    }
+
+    function setRow(id, label, value, unit) {
+      const el = document.getElementById(id);
+      const bar = document.getElementById(id + '-progress');
+      if (value === null || value === undefined) {
+        el.textContent = label + ': waiting for sensor';
+        bar.style.width = '0%';
+      } else {
+        el.textContent = label + ': ' + value + ' ' + unit;
+        bar.style.width = Math.max(0, Math.min(100, value)) + '%';
+      }
+    }
+
+    function fetchDataAndRefresh() {
+      fetch('/data')
+        .then(r => r.json())
+        .then(d => {
+          const note = document.getElementById('status-note');
+
+          if (!d.ok) {
+            setRow('temperature', 'Temperature', null, '');
+            setRow('humidity', 'Humidity', null, '');
+            setRow('soil-moisture', 'Soil Moisture', null, '');
+            note.textContent = d.error || 'No data available';
+            note.className = 'note bad';
+            return;
+          }
+
+          setRow('temperature', 'Temperature', d.temperature, '\u00b0C');
+          setRow('humidity', 'Humidity', d.humidity, '%');
+          setRow('soil-moisture', 'Soil Moisture', d.soil_moisture, '%');
+
+          // The board uploads every 15 s. If its reported uptime has not moved
+          // for a while, the value on screen is old rather than live.
+          if (d.stale_for > 60) {
+            note.textContent = 'Last reading is ' + d.stale_for +
+                               ' s old. The node may be offline.';
+            note.className = 'note bad';
+          } else {
+            note.textContent = 'Live. Raw soil value ' + d.soil_raw +
+                               ', node up ' + d.uptime_s + ' s.';
+            note.className = 'note good';
+          }
+        })
+        .catch(() => {
+          const note = document.getElementById('status-note');
+          note.textContent = 'Cannot reach the server';
+          note.className = 'note bad';
+        })
+        .finally(() => setTimeout(fetchDataAndRefresh, 2000));
+    }
+
+    fetchDataAndRefresh();
+  </script>
+</body>
+</html>
